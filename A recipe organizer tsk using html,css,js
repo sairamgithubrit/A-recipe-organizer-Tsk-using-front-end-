@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Organizer</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #7f9922;
+  color: #0f0f0f8c;
+  text-align: center;
+  padding: 20px 0;
+}
+
+main {
+  padding: 20px;
+}
+
+#recipe-form {
+  margin-bottom: 20px;
+}
+
+#recipe-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#recipe-form input,
+#recipe-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+#recipe-form button {
+  padding: 8px 16px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#recipe-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#recipe-list li {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Recipe Organizer</h1>
+  </header>
+  <main>
+    <section id="recipe-form">
+      <h2>Add a Recipe</h2>
+      <form id="add-recipe-form">
+        <label for="recipe-name">Recipe Name:</label>
+        <input type="text" id="recipe-name" required>
+        <label for="ingredients">Ingredients:</label>
+        <textarea id="ingredients" rows="4" required></textarea>
+        <button type="submit">Add Recipe</button>
+      </form>
+    </section>
+    <section id="recipe-list">
+      <h2>Recipes</h2>
+      <ul id="recipes"></ul>
+    </section>
+  </main>
+  <script >
+    document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('add-recipe-form');
+  const recipeList = document.getElementById('recipes');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const recipeName = document.getElementById('recipe-name').value;
+    const ingredients = document.getElementById('ingredients').value;
+
+    if (recipeName && ingredients) {
+      const recipeItem = document.createElement('li');
+      recipeItem.innerHTML = `
+        <strong>${recipeName}</strong>
+        <br>
+        <em>Ingredients:</em>
+        <p>${ingredients}</p>
+      `;
+      recipeList.appendChild(recipeItem);
+      
+      form.reset();
+    } else {
+      alert('Please fill out all fields');
+    }
+  });
+});
+
+  </script>
+</body>
+</html>
